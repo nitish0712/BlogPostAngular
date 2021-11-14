@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="card-deck row">
+		<div *ngFor="let blog of allBlogs" class="col-xs-12 col-sm-6 col-md-4">
+
+			<div class="card">
+
+				<div class="view overlay">
+
+					<a href="#!">
+						<div class="mask rgba-white-slight"></div>
+					</a>
+				</div>
+
+				<div class="card-body">
+
+					<h4 class="card-title">{{blog.title | uppercase}}</h4>
+					<h6 class="card-subtitle mb-2 text-muted">Posted on
+						{{blog.created | date}}</h6>
+
+            <h6 class="card-text"><b>Category: </b>{{blog.category}}</h6>
+            <p class="card-text"><b>Subject: </b>{{blog.description}}</p>
+
+					<button [routerLink]="['/blog',blog.blogId]" type="button" class="btn btn-outline-primary">Read more</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

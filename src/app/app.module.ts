@@ -1,18 +1,37 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { HttpClientModule } from "@angular/common/http";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./home/home.component";
+import { BlogViewComponent } from "./blog-view/blog-view.component";
+import { BlogHttpService } from "./blog-http.service";
+import { PostBlogComponent } from './post-blog/post-blog.component';
+import { BlogEditComponent } from './blog-edit/blog-edit.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    RouterModule.forRoot([
+      { path: "home", component: HomeComponent },
+      { path: "", redirectTo: "home", pathMatch: "full" },
+      { path: "blog/:blogId", component: BlogViewComponent },
+      { path: "create", component: PostBlogComponent },
+      { path: "edit/:blogId", component: BlogEditComponent },
+      { path: "**", component: NotFoundComponent }
+    ])
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, HomeComponent, BlogViewComponent, PostBlogComponent, BlogEditComponent, NotFoundComponent],
+  bootstrap: [AppComponent],
+  providers: [BlogHttpService]
 })
-export class AppModule { }
+export class AppModule {}
